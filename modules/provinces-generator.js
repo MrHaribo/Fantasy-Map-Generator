@@ -46,11 +46,27 @@ window.Provinces = (function () {
       if (provinces.length) s.provinces = provinces.filter(p => p.state === s.i).map(p => p.i); // locked provinces ids
       if (s.lock && !regenerateLockedStates) return; // don't regenerate provinces of a locked state
 
-      const stateBurgs = burgs
-        .filter(b => b.state === s.i && !b.removed && !provinceIds[b.cell])
-        .sort((a, b) => b.population * gauss(1, 0.2, 0.5, 1.5, 3) - a.population)
+      // TODO: Unreproducible sorting of provinces 
+
+      // const stateBurgs = burgs
+      //   .filter(b => b.state === s.i && !b.removed && !provinceIds[b.cell])
+      //   .sort((a, b) => b.population * gauss(1, 0.2, 0.5, 1.5, 3) - a.population)
+      //   .sort((a, b) => b.capital - a.capital);
+
+      // 1. Filter the valid burgs
+      let stateBurgs = burgs.filter(b => b.state === s.i && !b.removed && !provinceIds[b.cell]);
+
+      // 2. Pre-calculate the score so RNG is rolled strictly once per burg
+      stateBurgs = stateBurgs.map(b => ({
+        burg: b,
+        score: b.population * gauss(1, 0.2, 0.5, 1.5, 3)
+      }));
+
+      // 3. Sort purely by the static score, then by capital, and unwrap
+      stateBurgs = stateBurgs
+        .sort((a, b) => b.score - a.score)
+        .map(item => item.burg)
         .sort((a, b) => b.capital - a.capital);
-      if (stateBurgs.length < 2) return; // at least 2 provinces are required
 
       const provincesNumber = Math.max(Math.ceil((stateBurgs.length * provincesRatio) / 100), 2);
       const form = Object.assign({}, forms[s.form]);

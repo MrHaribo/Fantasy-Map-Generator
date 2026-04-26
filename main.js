@@ -615,6 +615,10 @@ async function generate(options) {
     applyGraphSize();
     randomizeOptions();
 
+    // Deterministic test setup
+    applyOption(byId("templateInput"), "continents", "continents");
+    changeCellsDensity(2);
+
     if (shouldRegenerateGrid(grid, precreatedSeed)) grid = precreatedGraph || generateGrid();
     else delete grid.cells.h;
     grid.cells.h = await HeightmapGenerator.generate(grid);

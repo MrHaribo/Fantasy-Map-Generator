@@ -5,7 +5,8 @@
       "name": "Debug",
       "type": "chrome",
       "request": "launch",
-      "file": "${workspaceFolder}/index.html"
+      "url": "http://127.0.0.1:5500/?seed=42&width=1920&height=1080",
+      "webRoot": "${workspaceFolder}"
     }
   ]
 }

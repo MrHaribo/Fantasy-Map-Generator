@@ -34,3 +34,7 @@ cells.c[cellId].forEach(neibCellId => {
 ## Suggestion
 
 Move the biom assignment `const biome = cells.biome[neibCellId];` outside the neighbor loop and use `cellId`.
+
+```
+const biome = cells.biome[cellId];
+```

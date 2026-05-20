@@ -38,3 +38,5 @@ Remove the erroneous ``.length`` property from the buddies assignment so it comp
 const buddies = neibs.filter(c => c === provinceIds[i]);
 if (buddies.length > 2) continue;
 ```
+
+## IS RESOLVED

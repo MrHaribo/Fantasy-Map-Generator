@@ -30,3 +30,5 @@ states[d].diplomacy
 ## Suggestion
 
 Add the vassals power to ap instead of dp
+
+## IS RESOLVED

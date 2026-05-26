@@ -32,6 +32,7 @@
     "@playwright/test": "^1.57.0",
     "@types/d3": "^7.4.3",
     "@types/delaunator": "^5.0.3",
+    "@types/jszip": "^3.4.0",
     "@types/lineclip": "^2.0.0",
     "@types/node": "^25.0.10",
     "@types/polylabel": "^1.1.3",
@@ -49,6 +50,7 @@
     "d3": "^7.9.0",
     "delaunator": "^5.0.1",
     "driver.js": "^1.4.0",
+    "jszip": "^3.10.1",
     "lineclip": "^2.0.0",
     "polylabel": "^2.0.1"
   },

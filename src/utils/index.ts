@@ -44,6 +44,25 @@ import { biased, each, gauss, generateSeed, getNumberInRange, P, Pint, ra, rand,
 import { capitalize, isValidJSON, parseTransform, round, safeParseJSON, sanitizeId, splitInTwo } from "./stringUtils";
 import { convertTemperature, getIntegerFromSI, si } from "./unitUtils";
 
+import { DumpCollector } from '../dump/dump.collector.ts';
+import { dumpGridData } from '../dump/grid.dump.ts';
+import { dumpHeightmapData } from '../dump/heightmap.dump.ts';
+import { dumpFeatureData } from '../dump/feature.dump.ts';
+
+declare global {
+  interface Window {
+    DumpCollector: typeof DumpCollector;
+    dumpGridData: typeof dumpGridData;
+    dumpHeightmapData: typeof dumpHeightmapData;
+    dumpFeatureData: typeof dumpFeatureData;
+  }
+}
+
+window.DumpCollector = DumpCollector;
+window.dumpGridData = dumpGridData;
+window.dumpHeightmapData = dumpHeightmapData;
+window.dumpFeatureData = dumpFeatureData;
+
 window.rn = rn;
 window.lim = lim;
 window.minmax = minmax;

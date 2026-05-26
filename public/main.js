@@ -9,6 +9,7 @@ const INFO = true;
 const TIME = true;
 const WARN = true;
 const ERROR = true;
+const DUMP = true;
 
 // detect device
 const MOBILE = window.innerWidth < 600 || navigator.userAgentData?.mobile;
@@ -640,6 +641,14 @@ async function generate(options) {
     const timeStart = performance.now();
     const {seed: precreatedSeed, graph: precreatedGraph} = options || {};
 
+    const dumpCollector = new DumpCollector();
+
+    await dumpGridData(dumpCollector);
+    await dumpHeightmapData(dumpCollector);
+    await dumpFeatureData(dumpCollector);
+
+    await dumpCollector.downloadZip(seed);
+
     invokeActiveZooming();
     setSeed(precreatedSeed);
     INFO && console.group("Generated Map " + seed);
@@ -702,7 +711,7 @@ async function generate(options) {
     showStatistics();
     INFO && console.groupEnd("Generated Map " + seed);
   } catch (error) {
-    ERROR && console.error(error);
+     ERROR && console.error(error);
     const parsedError = parseError(error);
     clearMainTip();
 

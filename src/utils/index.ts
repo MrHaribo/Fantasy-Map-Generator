@@ -2,6 +2,11 @@ import { createTypedArray, getTypedArray, last, TYPED_ARRAY_MAX_VALUES, unique }
 import { abbreviate, getAdjective, isVowel, list, nth, trimVowels } from "./languageUtils";
 import { lerp, lim, minmax, normalize, rn } from "./numberUtils";
 import "./polyfills";
+
+import { DumpCollector } from "../dump/dump.collector.ts";
+import { dumpFeatureData } from "../dump/feature.dump.ts";
+import { dumpGridData } from "../dump/grid.dump.ts";
+import { dumpHeightmapData } from "../dump/heightmap.dump.ts";
 import { C_12, getColors, getMixedColor, getRandomColor, toHEX } from "./colorUtils";
 import {
   clipPoly,
@@ -43,11 +48,6 @@ import { connectVertices, findPath, getIsolines, getPolesOfInaccessibility, getV
 import { biased, each, gauss, generateSeed, getNumberInRange, P, Pint, ra, rand, rw } from "./probabilityUtils";
 import { capitalize, isValidJSON, parseTransform, round, safeParseJSON, sanitizeId, splitInTwo } from "./stringUtils";
 import { convertTemperature, getIntegerFromSI, si } from "./unitUtils";
-
-import { DumpCollector } from '../dump/dump.collector.ts';
-import { dumpGridData } from '../dump/grid.dump.ts';
-import { dumpHeightmapData } from '../dump/heightmap.dump.ts';
-import { dumpFeatureData } from '../dump/feature.dump.ts';
 
 declare global {
   interface Window {

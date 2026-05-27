@@ -1,4 +1,4 @@
-import JSZip from 'jszip';
+import JSZip from "jszip";
 
 export class DumpCollector {
   // Stores filename as key, and the stringified JSON as value
@@ -35,7 +35,7 @@ export class DumpCollector {
     const link = document.createElement("a");
     link.href = URL.createObjectURL(blob);
     link.download = `regression_data_${Date.now()}.zip`;
-    
+
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);

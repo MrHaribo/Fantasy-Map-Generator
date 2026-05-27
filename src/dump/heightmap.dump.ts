@@ -1,6 +1,6 @@
 import { ensureEl } from "../utils/nodeUtils.js";
 import type { DumpCollector } from "./dump.collector.js";
-import { defaultDumpSetup } from "./dump.utils.js";
+import { defaultDumpSetup, initRandom } from "./dump.utils.js";
 
 export interface HeightmapTestCase {
   name: string;
@@ -46,6 +46,8 @@ export const openNearSeaLakesTestCases: HeightmapTestCase[] = [
 
 const dumpHeightmapDataSequence = async (collector: DumpCollector, testCases: HeightmapTestCase[], sequence: any) => {
   const win = window as any;
+
+  initRandom();
 
   win.applyGraphSize();
   win.randomizeOptions();

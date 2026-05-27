@@ -159,6 +159,7 @@ let options = {
     groups: JSON.safeParse(localStorage.getItem("burg-groups")) || Burgs.getDefaultGroups()
   }
 };
+globalThis.globalOptions = options;
 
 // global style object; in v2.0 to be used for all map styles and render settings
 let style = {burgLabels: {}, burgIcons: {}, anchors: {}};

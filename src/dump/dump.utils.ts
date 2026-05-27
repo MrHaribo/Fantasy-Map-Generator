@@ -14,7 +14,6 @@ export const defaultDumpSetup = (options: TestOptions = {}) => {
   globalThis.seed = seed;
   globalThis.graphWidth = width;
   globalThis.graphHeight = height;
-  Math.random = Alea(seed);
 
   const win = window as any;
 
@@ -41,4 +40,8 @@ export const templateFromParams = () => {
     (window as any).applyOption((window as any).ensureEl("templateInput"), templateParam, name);
     console.log(`🛠️ Overriding points count via URL: ${templateParam}`);
   }
+};
+
+export const initRandom = (seed: string = "42") => {
+  Math.random = Alea(seed);
 };

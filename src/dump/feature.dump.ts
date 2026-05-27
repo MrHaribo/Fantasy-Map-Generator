@@ -1,5 +1,5 @@
 import type { DumpCollector } from "./dump.collector.ts";
-import { defaultDumpSetup } from "./dump.utils.ts";
+import { defaultDumpSetup, initRandom } from "./dump.utils.ts";
 
 // --- INTERFACES ---
 export interface FeatureRegressionItem {
@@ -17,6 +17,8 @@ export interface GridFeatureRegressionData {
 // --- DUMP FUNCTION ---
 export const dumpFeatureData = async (collector: DumpCollector) => {
   const win = window as any;
+
+  initRandom();
 
   win.applyGraphSize();
   win.randomizeOptions();

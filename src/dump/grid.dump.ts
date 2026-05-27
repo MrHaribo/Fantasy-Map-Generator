@@ -1,6 +1,6 @@
 // src/dump/grid.dump.ts
 import type { DumpCollector } from "./dump.collector";
-import { defaultDumpSetup } from "./dump.utils";
+import { defaultDumpSetup, initRandom } from "./dump.utils";
 
 // --- INTERFACES ---
 export interface PointsRegressionData {
@@ -33,6 +33,8 @@ export interface VoronoiRegressionData {
 // --- DUMP FUNCTION ---
 export const dumpGridData = async (collector: DumpCollector) => {
   const win = window as any;
+
+  initRandom();
 
   win.applyGraphSize();
   win.randomizeOptions();

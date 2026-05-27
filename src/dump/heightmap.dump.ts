@@ -34,7 +34,17 @@ export const heightmapTestCases: HeightmapTestCase[] = [
   { name: "template_continents", recipe: "continents", isTemplate: true }
 ];
 
-export const dumpHeightmapData = async (collector: DumpCollector) => {
+export const lakesInDepressionsTestCases: HeightmapTestCase[] = [
+  { name: "lakes_in_depressions_simple", recipe: "Hill 1 80-85 60-80 40-60;Hill 1 80-85 20-30 40-60" },
+  { name: "lakes_in_depressions_template_continents", recipe: "continents", isTemplate: true }
+];
+
+export const openNearSeaLakesTestCases: HeightmapTestCase[] = [
+  { name: "open_near_sea_lakes_simple", recipe: "Hill 1 80-85 60-80 40-60;Hill 1 80-85 20-30 40-60" },
+  { name: "open_near_sea_lakes_template_continents", recipe: "continents", isTemplate: true }
+];
+
+const dumpHeightmapDataSequence = async (collector: DumpCollector, testCases: HeightmapTestCase[], sequence: any) => {
   const win = window as any;
 
   win.applyGraphSize();
@@ -42,7 +52,7 @@ export const dumpHeightmapData = async (collector: DumpCollector) => {
 
   defaultDumpSetup();
 
-  for (const testCase of heightmapTestCases) {
+  for (const testCase of testCases) {
     console.log(`🧪 Running Heightmap Regression: ${testCase.name}`);
 
     if (!testCase.isTemplate) {
@@ -56,8 +66,7 @@ export const dumpHeightmapData = async (collector: DumpCollector) => {
     const heightmapName = (globalThis as any).heightmapTemplates[heightmapId]?.name || heightmapId;
     win.applyOption(ensureEl("templateInput"), heightmapId, heightmapName);
 
-    globalThis.grid = win.generateGrid();
-    globalThis.grid.cells.h = await HeightmapGenerator.generate(globalThis.grid);
+    await sequence();
 
     collector.capture(`heightmap_${testCase.name}_regression.json`, {
       Seed: globalThis.seed,
@@ -66,4 +75,30 @@ export const dumpHeightmapData = async (collector: DumpCollector) => {
       Heights: Array.from(globalThis.grid.cells.h)
     });
   }
+};
+
+export const dumpHeightmapData = async (collector: DumpCollector) => {
+  await dumpHeightmapDataSequence(collector, heightmapTestCases, async () => {
+    globalThis.grid = (window as any).generateGrid();
+    globalThis.grid.cells.h = await HeightmapGenerator.generate(globalThis.grid);
+  });
+};
+
+export const dumpLakesInDepressionsHeightmapData = async (collector: DumpCollector) => {
+  await dumpHeightmapDataSequence(collector, lakesInDepressionsTestCases, async () => {
+    globalThis.grid = (window as any).generateGrid();
+    globalThis.grid.cells.h = await HeightmapGenerator.generate(globalThis.grid);
+    Features.markupGrid();
+    addLakesInDeepDepressions();
+  });
+};
+
+export const dumpOpenNearSeaLakesHeightmapData = async (collector: DumpCollector) => {
+  await dumpHeightmapDataSequence(collector, openNearSeaLakesTestCases, async () => {
+    globalThis.grid = (window as any).generateGrid();
+    globalThis.grid.cells.h = await HeightmapGenerator.generate(globalThis.grid);
+    Features.markupGrid();
+    addLakesInDeepDepressions();
+    openNearSeaLakes();
+  });
 };

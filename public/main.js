@@ -641,13 +641,7 @@ async function generate(options) {
     const timeStart = performance.now();
     const {seed: precreatedSeed, graph: precreatedGraph} = options || {};
 
-    const dumpCollector = new DumpCollector();
-
-    await dumpGridData(dumpCollector);
-    await dumpHeightmapData(dumpCollector);
-    await dumpFeatureData(dumpCollector);
-
-    await dumpCollector.downloadZip(seed);
+    DUMP && await dumpRegressionData();
 
     invokeActiveZooming();
     setSeed(precreatedSeed);

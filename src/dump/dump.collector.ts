@@ -34,13 +34,13 @@ export class DumpCollector {
     const blob = await zip.generateAsync({ type: "blob" });
     const link = document.createElement("a");
     link.href = URL.createObjectURL(blob);
-    link.download = `regression_data_${Date.now()}.zip`;
+    link.download = `regression_data_${new Date().toISOString()}.zip`;
 
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
     URL.revokeObjectURL(link.href);
 
-    console.log(`✅ ZIP downloaded: regression_data_${Date.now()}.zip`);
+    console.log(`✅ ZIP downloaded: regression_data_${seed}_${new Date().toISOString()}.zip`);
   }
 }

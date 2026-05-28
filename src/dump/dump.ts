@@ -1,7 +1,7 @@
 import { dumpBiomeData } from "./biome.dump";
 import { dumpPrecipitationData, dumpTemperatureData } from "./climate.dump";
 import { DumpCollector } from "./dump.collector";
-import { dumpFeatureGroupsData, dumpGridFeatureData, dumpPackFeatureData } from "./feature.dump";
+import { dumpCellRankData, dumpFeatureGroupsData, dumpGridFeatureData, dumpPackFeatureData } from "./feature.dump";
 import { dumpGlobeData } from "./globe.dump";
 import { dumpGridData } from "./grid.dump";
 import {
@@ -10,6 +10,7 @@ import {
   dumpOpenNearSeaLakesHeightmapData
 } from "./heightmap.dump";
 import { dumpIceData } from "./ice.dump";
+import { dumpNameData } from "./name.dump";
 import { dumpOptionsData } from "./options.dump";
 import { dumpPackData } from "./pack.dump";
 import { dumpRiverData } from "./river.dump";
@@ -18,6 +19,7 @@ export const dumpRegressionData = async () => {
   const dumpCollector = new DumpCollector();
 
   await dumpOptionsData(dumpCollector);
+  await dumpNameData(dumpCollector);
   await dumpGridData(dumpCollector);
   await dumpHeightmapData(dumpCollector);
   await dumpGridFeatureData(dumpCollector);
@@ -32,6 +34,7 @@ export const dumpRegressionData = async () => {
   await dumpBiomeData(dumpCollector);
   await dumpFeatureGroupsData(dumpCollector);
   await dumpIceData(dumpCollector);
+  await dumpCellRankData(dumpCollector);
 
   await dumpCollector.downloadZip(seed);
 };

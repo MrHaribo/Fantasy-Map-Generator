@@ -118,11 +118,6 @@ export const dumpFeatureGroupsData = async (collector: DumpCollector) => {
 
   const pack = globalThis.pack;
 
-  if (!pack?.features) {
-    console.error("DEBUG: pack.features is undefined! Feature Groups dump aborted.");
-    return;
-  }
-
   const features: FeatureGroupEntry[] = pack.features
     .filter((f: any) => f)
     .map((f: any) => ({
@@ -147,11 +142,6 @@ export const dumpCellRankData = async (collector: DumpCollector) => {
   await executeGenerationSequence(GenerationStep.RankCells);
 
   const pack = globalThis.pack;
-
-  if (!pack?.cells?.s || !pack?.cells?.pop) {
-    console.error("DEBUG: Suitability or Population data missing! Cell Rank dump aborted.");
-    return;
-  }
 
   const data: CellRankRegressionData = {
     Seed: globalThis.seed,

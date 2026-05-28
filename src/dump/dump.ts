@@ -10,6 +10,7 @@ import {
 } from "./heightmap.dump";
 import { dumpOptionsData } from "./options.dump";
 import { dumpPackData } from "./pack.dump";
+import { dumpRiverData } from "./river.dump";
 
 export const dumpRegressionData = async () => {
   const dumpCollector = new DumpCollector();
@@ -25,7 +26,8 @@ export const dumpRegressionData = async () => {
   await dumpPrecipitationData(dumpCollector);
   await dumpPackData(dumpCollector);
   await dumpPackFeatureData(dumpCollector);
-
+  await dumpRiverData(dumpCollector);
+  
   await dumpCollector.downloadZip(seed);
 };
 

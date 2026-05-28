@@ -1,4 +1,5 @@
 import type { DumpCollector } from "./dump.collector.ts";
+import { executeGenerationSequence, GenerationStep } from "./dump.sequence.ts";
 import { defaultDumpSetup, initRandom } from "./dump.utils.ts";
 
 // --- INTERFACES ---
@@ -24,25 +25,7 @@ export interface GlobeRegressionData {
 export const dumpGlobeData = async (collector: DumpCollector) => {
   const win = window as any;
 
-  initRandom();
-
-  // 1. Setup MapData (mirroring C# execution sequence)
-  win.applyGraphSize();
-  win.randomizeOptions();
-
-  defaultDumpSetup();
-
-  globalThis.grid = win.generateGrid();
-  globalThis.grid.cells.h = await win.HeightmapGenerator.generate(globalThis.grid);
-
-  Features.markupGrid();
-  addLakesInDeepDepressions();
-  openNearSeaLakes();
-
-  // 2. Execute Placement Logic
-  // defineMapSize determines the bounding constraints, calculateMapCoordinates generates the actual rect
-  win.defineMapSize();
-  calculateMapCoordinates();
+  await executeGenerationSequence(GenerationStep.CalculateMapCoordinates);
 
   // 3. Extract the data
   // FMG stores these primary globe values directly in the DOM inputs during generation

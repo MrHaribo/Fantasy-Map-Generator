@@ -1,5 +1,5 @@
 import type { DumpCollector } from "./dump.collector.ts";
-import { defaultDumpSetup, initRandom } from "./dump.utils.ts";
+import { executeGenerationSequence, GenerationStep } from "./dump.sequence.ts";
 
 // --- INTERFACES ---
 export interface FeatureRegressionItem {
@@ -16,18 +16,8 @@ export interface GridFeatureRegressionData {
 
 // --- DUMP FUNCTION ---
 export const dumpFeatureData = async (collector: DumpCollector) => {
-  const win = window as any;
 
-  initRandom();
-
-  win.applyGraphSize();
-  win.randomizeOptions();
-
-  defaultDumpSetup();
-
-  globalThis.grid = win.generateGrid();
-  globalThis.grid.cells.h = await HeightmapGenerator.generate(globalThis.grid);
-  Features.markupGrid();
+  await executeGenerationSequence(GenerationStep.FeaturesMarkupGrid);
 
   // 1. Extract and map the features array
   const validFeatures = globalThis.grid.features

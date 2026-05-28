@@ -32,7 +32,6 @@ export interface VoronoiRegressionData {
 
 // --- DUMP FUNCTION ---
 export const dumpGridData = async (collector: DumpCollector) => {
-
   await executeGenerationSequence(GenerationStep.Grid);
 
   const grid = globalThis.grid;

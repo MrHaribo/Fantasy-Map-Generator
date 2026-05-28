@@ -38,11 +38,11 @@ export const dumpGlobeData = async (collector: DumpCollector) => {
 
   // 4. Build the exact data structure C# expects
   const globeData: GlobeRegressionData = {
-    Template: templateInput?.value || "continents",
+    Template: templateInput.value,
     Seed: globalThis.seed,
-    Size: Number(sizeInput?.value || 100),
-    Lat: Number(latInput?.value || 0),
-    Lon: Number(lonInput?.value || 0),
+    Size: Number(sizeInput.value),
+    Lat: Number(latInput.value),
+    Lon: Number(lonInput.value),
     Coords: {
       LatT: coords.latT,
       LatN: coords.latN,

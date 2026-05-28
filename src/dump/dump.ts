@@ -1,3 +1,4 @@
+import { dumpBiomeData } from "./biome.dump";
 import { dumpPrecipitationData, dumpTemperatureData } from "./climate.dump";
 import { DumpCollector } from "./dump.collector";
 import { dumpGridFeatureData, dumpPackFeatureData } from "./feature.dump";
@@ -27,7 +28,8 @@ export const dumpRegressionData = async () => {
   await dumpPackData(dumpCollector);
   await dumpPackFeatureData(dumpCollector);
   await dumpRiverData(dumpCollector);
-  
+  await dumpBiomeData(dumpCollector);
+
   await dumpCollector.downloadZip(seed);
 };
 

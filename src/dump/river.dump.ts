@@ -61,7 +61,7 @@ export const dumpRiverData = async (collector: DumpCollector) => {
   await executeGenerationSequence(GenerationStep.RiversGenerate);
 
   const pack = globalThis.pack;
-  
+
   // 1. Map River Data
   const rivers: RiverEntry[] = pack.rivers.map((r: any) => ({
     Id: r.i,
@@ -74,20 +74,13 @@ export const dumpRiverData = async (collector: DumpCollector) => {
     WidthFactor: r.widthFactor || 0,
     SourceWidth: r.sourceWidth,
     CellCount: r.cells.length,
-    CellSample: [
-      r.cells[0], 
-      r.cells[1], 
-      r.cells[2], 
-      r.cells.at(-3), 
-      r.cells.at(-2), 
-      r.cells.at(-1)
-    ]
+    CellSample: [r.cells[0], r.cells[1], r.cells[2], r.cells.at(-3), r.cells.at(-2), r.cells.at(-1)]
   }));
 
   // 2. Map Cell Hydrology to PascalCase
   const cellLength = pack.cells.i.length;
   const cells: CellHydrologyEntry[] = new Array(cellLength);
-  
+
   for (let i = 0; i < cellLength; i++) {
     cells[i] = {
       Index: i,

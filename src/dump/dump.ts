@@ -9,6 +9,7 @@ import {
   dumpLakesInDepressionsHeightmapData,
   dumpOpenNearSeaLakesHeightmapData
 } from "./heightmap.dump";
+import { dumpIceData } from "./ice.dump";
 import { dumpOptionsData } from "./options.dump";
 import { dumpPackData } from "./pack.dump";
 import { dumpRiverData } from "./river.dump";
@@ -30,6 +31,7 @@ export const dumpRegressionData = async () => {
   await dumpRiverData(dumpCollector);
   await dumpBiomeData(dumpCollector);
   await dumpFeatureGroupsData(dumpCollector);
+  await dumpIceData(dumpCollector);
 
   await dumpCollector.downloadZip(seed);
 };

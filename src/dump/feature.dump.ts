@@ -2,7 +2,7 @@ import type { DumpCollector } from "./dump.collector.ts";
 import { executeGenerationSequence, GenerationStep } from "./dump.sequence.ts";
 
 // --- INTERFACES ---
-export interface FeatureRegressionItem {
+export interface GridFeatureRegressionItem {
   i: number;
   type: string;
   land: boolean;
@@ -11,7 +11,7 @@ export interface FeatureRegressionItem {
 export interface GridFeatureRegressionData {
   CellFeatures: number[];
   CellDistances: number[];
-  Features: FeatureRegressionItem[];
+  Features: GridFeatureRegressionItem[];
 }
 
 export interface PackFeatureRegressionItem {
@@ -84,20 +84,22 @@ export const dumpPackFeatureData = async (collector: DumpCollector) => {
   await executeGenerationSequence(GenerationStep.FeaturesMarkupPack);
 
   const pack = globalThis.pack;
-  
+
   // 2. Map the data to our clean PascalCase interface
-  const features: PackFeatureRegressionItem[] = pack.features.filter((f: any) => f).map((f: any) => ({
-    Id: f.i,
-    Type: f.type,
-    IsLand: f.land,
-    IsBorder: f.border,
-    CellsCount: f.cells,
-    FirstCell: f.firstCell,
-    Vertices: f.vertices || [],
-    Area: f.area,
-    Height: f.height,
-    ShorelineCells: f.shoreline || []
-  }));
+  const features: PackFeatureRegressionItem[] = pack.features
+    .filter((f: any) => f)
+    .map((f: any) => ({
+      Id: f.i,
+      Type: f.type,
+      IsLand: f.land,
+      IsBorder: f.border,
+      CellsCount: f.cells,
+      FirstCell: f.firstCell,
+      Vertices: f.vertices || [],
+      Area: f.area,
+      Height: f.height,
+      ShorelineCells: f.shoreline || []
+    }));
 
   const data: PackFeatureRegressionData = {
     CellFeatures: Array.from(pack.cells.f),
@@ -121,14 +123,16 @@ export const dumpFeatureGroupsData = async (collector: DumpCollector) => {
     return;
   }
 
-  const features: FeatureGroupEntry[] = pack.features.filter((f: any) => f).map((f: any) => ({
-    Id: f.i,
-    Type: f.type,
-    Group: f.group,
-    Cells: f.cells,
-    Height: f.height,
-    Temp: f.temp
-  }));
+  const features: FeatureGroupEntry[] = pack.features
+    .filter((f: any) => f)
+    .map((f: any) => ({
+      Id: f.i,
+      Type: f.type,
+      Group: f.group,
+      Cells: f.cells,
+      Height: f.height,
+      Temp: f.temp
+    }));
 
   const data: FeatureGroupRegressionData = {
     Seed: globalThis.seed,

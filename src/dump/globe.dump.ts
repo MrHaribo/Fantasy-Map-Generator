@@ -1,15 +1,14 @@
 import type { DumpCollector } from "./dump.collector.ts";
 import { executeGenerationSequence, GenerationStep } from "./dump.sequence.ts";
-import { defaultDumpSetup, initRandom } from "./dump.utils.ts";
 
 // --- INTERFACES ---
 export interface RegressionMapCoordinates {
-  LatT: number;
-  LatN: number;
-  LatS: number;
-  LonT: number;
-  LonW: number;
-  LonE: number;
+  LatT?: number;
+  LatN?: number;
+  LatS?: number;
+  LonT?: number;
+  LonW?: number;
+  LonE?: number;
 }
 
 export interface GlobeRegressionData {
@@ -35,7 +34,7 @@ export const dumpGlobeData = async (collector: DumpCollector) => {
   const templateInput = win.document.getElementById("templateInput") as HTMLInputElement;
 
   // FMG exposes the resulting coordinate calculations on the global window.mapCoordinates object
-  const coords = win.mapCoordinates;
+  const coords = globalThis.mapCoordinates;
 
   // 4. Build the exact data structure C# expects
   const globeData: GlobeRegressionData = {

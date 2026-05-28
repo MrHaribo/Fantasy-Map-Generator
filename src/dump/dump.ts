@@ -9,6 +9,7 @@ import {
   dumpOpenNearSeaLakesHeightmapData
 } from "./heightmap.dump";
 import { dumpOptionsData } from "./options.dump";
+import { dumpPackData } from "./pack.dump";
 
 export const dumpRegressionData = async () => {
   const dumpCollector = new DumpCollector();
@@ -22,6 +23,7 @@ export const dumpRegressionData = async () => {
   await dumpGlobeData(dumpCollector);
   await dumpTemperatureData(dumpCollector);
   await dumpPrecipitationData(dumpCollector);
+  await dumpPackData(dumpCollector);
 
   await dumpCollector.downloadZip(seed);
 };

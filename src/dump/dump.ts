@@ -16,10 +16,11 @@ import { dumpIceData } from "./ice.dump";
 import { dumpNameData } from "./name.dump";
 import { dumpOptionsData } from "./options.dump";
 import { dumpPackData } from "./pack.dump";
+import { dumpProvincesData } from "./province.dump";
 import { dumpReligionData } from "./religion.dump";
 import { dumpRiverData } from "./river.dump";
 import { dumpRouteData } from "./routes.dump";
-import { dumpStateData } from "./state.dump";
+import { dumpStateData, dumpStateFormsData, dumpStateStatsData } from "./state.dump";
 
 export const dumpRegressionData = async () => {
   const collector = new DumpCollector();
@@ -50,6 +51,9 @@ export const dumpRegressionData = async () => {
   await dumpRouteData(collector);
   await dumpReligionData(collector);
   await dumpBurgSpecData(collector);
+  await dumpStateStatsData(collector);
+  await dumpStateFormsData(collector);
+  await dumpProvincesData(collector);
 
   restoreCOA();
 

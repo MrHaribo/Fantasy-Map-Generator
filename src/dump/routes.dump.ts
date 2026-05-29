@@ -11,7 +11,7 @@ export interface RegressionRoutePoint {
 
 export interface RegressionRoute {
   Id: number;
-  Group: string; 
+  Group: string;
   FeatureId: number;
   Points: RegressionRoutePoint[];
 }

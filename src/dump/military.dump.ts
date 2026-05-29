@@ -33,13 +33,13 @@ export interface RegressionMilitaryData {
 export const dumpMilitaryData = async (collector: DumpCollector) => {
   // Run sequence up to Military generation
   await executeGenerationSequence(GenerationStep.MilitaryGenerate);
-  
+
   const pack = globalThis.pack;
   const notes = globalThis.globalNotes;
 
   // Helper to replicate FMG's 'rn' rounding function
   const rn = (v: number, decimals: number = 0) => {
-    const multiplier = Math.pow(10, decimals);
+    const multiplier = 10 ** decimals;
     return Math.round(v * multiplier) / multiplier;
   };
 
@@ -54,22 +54,22 @@ export const dumpMilitaryData = async (collector: DumpCollector) => {
           Id: reg.i,
           StateId: reg.state,
           CellId: reg.cell,
-          Total: rn(reg.a),          // Mapped 'a' to 'Total'
+          Total: rn(reg.a), // Mapped 'a' to 'Total'
           X: rn(reg.x, 2),
           Y: rn(reg.y, 2),
           Bx: rn(reg.bx, 2),
           By: rn(reg.by, 2),
-          Composition: reg.u,  // Mapped 'u' to 'Composition'
-          IsNaval: reg.n,       // Mapped 'n' to 'IsNaval'
+          Composition: reg.u, // Mapped 'u' to 'Composition'
+          IsNaval: reg.n, // Mapped 'n' to 'IsNaval'
           Name: reg.name,
           Icon: reg.icon,
           Legend: note.legend
         };
       });
 
-      return { 
-        Id: s.i, 
-        Military: regiments 
+      return {
+        Id: s.i,
+        Military: regiments
       };
     });
 
@@ -77,5 +77,5 @@ export const dumpMilitaryData = async (collector: DumpCollector) => {
     States: statesDump
   };
 
-  collector.capture("regression_military.json", data);
+  collector.capture("military_regression.json", data);
 };

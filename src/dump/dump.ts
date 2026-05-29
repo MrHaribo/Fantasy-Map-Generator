@@ -3,6 +3,7 @@ import { dumpBurgData, dumpBurgSpecData } from "./burg.dump";
 import { dumpPrecipitationData, dumpTemperatureData } from "./climate.dump";
 import { dumpCultureData, dumpCultureExpansionData } from "./culture.dump";
 import { DumpCollector } from "./dump.collector";
+import { dumpMarkerData } from "./dump.markers";
 import { mockCOA, restoreCOA } from "./dump.utils";
 import { dumpCellRankData, dumpFeatureGroupsData, dumpGridFeatureData, dumpPackFeatureData } from "./feature.dump";
 import { dumpGlobeData } from "./globe.dump";
@@ -58,6 +59,7 @@ export const dumpRegressionData = async () => {
   await dumpRiverSpecData(collector);
   await dumpLakeSpecData(collector);
   await dumpMilitaryData(collector);
+  await dumpMarkerData(collector);
 
   restoreCOA();
 

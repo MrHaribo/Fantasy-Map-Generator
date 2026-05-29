@@ -114,7 +114,8 @@ class BurgModule {
     const generateCapitals = () => {
       const randomize = (score: number) => score * (0.5 + Math.random() * 0.5);
       const score = new Int16Array(cells.s.map(randomize));
-      const sorted = populatedCells.sort((a, b) => score[b] - score[a]);
+      //const sorted = populatedCells.sort((a, b) => score[b] - score[a]);
+      const sorted = populatedCells.sort((a, b) => (score[b] - score[a]) || (a - b));
 
       const capitalsNumber = getCapitalsNumber();
       let spacing = (graphWidth + graphHeight) / 2 / capitalsNumber; // min distance between capitals
@@ -153,7 +154,8 @@ class BurgModule {
     const generateTowns = () => {
       const randomize = (score: number) => score * gauss(1, 3, 0, 20, 3);
       const score = new Int16Array(cells.s.map(randomize));
-      const sorted = populatedCells.sort((a, b) => score[b] - score[a]);
+      //const sorted = populatedCells.sort((a, b) => score[b] - score[a]);
+      const sorted = populatedCells.sort((a, b) => (score[b] - score[a]) || (a - b));
 
       const burgsNumber = getTownsNumber();
       let spacing = (graphWidth + graphHeight) / 150 / (burgsNumber ** 0.7 / 66); // min distance between town

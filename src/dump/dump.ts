@@ -1,5 +1,5 @@
 import { dumpBiomeData } from "./biome.dump";
-import { dumpBurgData } from "./burg.dump";
+import { dumpBurgData, dumpBurgSpecData } from "./burg.dump";
 import { dumpPrecipitationData, dumpTemperatureData } from "./climate.dump";
 import { dumpCultureData, dumpCultureExpansionData } from "./culture.dump";
 import { DumpCollector } from "./dump.collector";
@@ -49,6 +49,7 @@ export const dumpRegressionData = async () => {
   await dumpStateData(collector);
   await dumpRouteData(collector);
   await dumpReligionData(collector);
+  await dumpBurgSpecData(collector);
 
   restoreCOA();
 

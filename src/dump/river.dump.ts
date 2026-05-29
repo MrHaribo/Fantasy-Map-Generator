@@ -109,7 +109,7 @@ export const dumpRiverSpecData = async (collector: DumpCollector) => {
   // Map directly to PascalCase expectations
   const rivers: RegressionRiverSpec[] = pack.rivers.map((r: any) => ({
     Id: r.i,
-    Parent: r.parent || 0,
+    Parent: r.parent,
     Mouth: r.mouth,
     Length: r.length,
     Basin: r.basin,

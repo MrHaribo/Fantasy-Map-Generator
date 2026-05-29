@@ -1,7 +1,9 @@
 import { dumpBiomeData } from "./biome.dump";
+import { dumpBurgData } from "./burg.dump";
 import { dumpPrecipitationData, dumpTemperatureData } from "./climate.dump";
-import { dumpCultureData } from "./culture.dump";
+import { dumpCultureData, dumpCultureExpansionData } from "./culture.dump";
 import { DumpCollector } from "./dump.collector";
+import { mockCOA, restoreCOA } from "./dump.utils";
 import { dumpCellRankData, dumpFeatureGroupsData, dumpGridFeatureData, dumpPackFeatureData } from "./feature.dump";
 import { dumpGlobeData } from "./globe.dump";
 import { dumpGridData } from "./grid.dump";
@@ -15,30 +17,38 @@ import { dumpNameData } from "./name.dump";
 import { dumpOptionsData } from "./options.dump";
 import { dumpPackData } from "./pack.dump";
 import { dumpRiverData } from "./river.dump";
+import { dumpStateData } from "./state.dump";
 
 export const dumpRegressionData = async () => {
-  const dumpCollector = new DumpCollector();
+  const collector = new DumpCollector();
 
-  await dumpOptionsData(dumpCollector);
-  await dumpNameData(dumpCollector);
-  await dumpGridData(dumpCollector);
-  await dumpHeightmapData(dumpCollector);
-  await dumpGridFeatureData(dumpCollector);
-  await dumpLakesInDepressionsHeightmapData(dumpCollector);
-  await dumpOpenNearSeaLakesHeightmapData(dumpCollector);
-  await dumpGlobeData(dumpCollector);
-  await dumpTemperatureData(dumpCollector);
-  await dumpPrecipitationData(dumpCollector);
-  await dumpPackData(dumpCollector);
-  await dumpPackFeatureData(dumpCollector);
-  await dumpRiverData(dumpCollector);
-  await dumpBiomeData(dumpCollector);
-  await dumpFeatureGroupsData(dumpCollector);
-  await dumpIceData(dumpCollector);
-  await dumpCellRankData(dumpCollector);
-  await dumpCultureData(dumpCollector);
+  mockCOA();
 
-  await dumpCollector.downloadZip(seed);
+  await dumpOptionsData(collector);
+  await dumpNameData(collector);
+  await dumpGridData(collector);
+  await dumpHeightmapData(collector);
+  await dumpGridFeatureData(collector);
+  await dumpLakesInDepressionsHeightmapData(collector);
+  await dumpOpenNearSeaLakesHeightmapData(collector);
+  await dumpGlobeData(collector);
+  await dumpTemperatureData(collector);
+  await dumpPrecipitationData(collector);
+  await dumpPackData(collector);
+  await dumpPackFeatureData(collector);
+  await dumpRiverData(collector);
+  await dumpBiomeData(collector);
+  await dumpFeatureGroupsData(collector);
+  await dumpIceData(collector);
+  await dumpCellRankData(collector);
+  await dumpCultureData(collector);
+  await dumpCultureExpansionData(collector);
+  await dumpBurgData(collector);
+  await dumpStateData(collector);
+
+  restoreCOA();
+
+  await collector.downloadZip(seed);
 };
 
 declare global {

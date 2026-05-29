@@ -17,6 +17,7 @@ import { dumpNameData } from "./name.dump";
 import { dumpOptionsData } from "./options.dump";
 import { dumpPackData } from "./pack.dump";
 import { dumpRiverData } from "./river.dump";
+import { dumpRouteData } from "./routes.dump";
 import { dumpStateData } from "./state.dump";
 
 export const dumpRegressionData = async () => {
@@ -45,6 +46,7 @@ export const dumpRegressionData = async () => {
   await dumpCultureExpansionData(collector);
   await dumpBurgData(collector);
   await dumpStateData(collector);
+  await dumpRouteData(collector);
 
   restoreCOA();
 

@@ -13,6 +13,7 @@ import {
   dumpOpenNearSeaLakesHeightmapData
 } from "./heightmap.dump";
 import { dumpIceData } from "./ice.dump";
+import { dumpMilitaryData } from "./military.dump";
 import { dumpNameData } from "./name.dump";
 import { dumpOptionsData } from "./options.dump";
 import { dumpPackData } from "./pack.dump";
@@ -56,6 +57,7 @@ export const dumpRegressionData = async () => {
   await dumpProvincesData(collector);
   await dumpRiverSpecData(collector);
   await dumpLakeSpecData(collector);
+  await dumpMilitaryData(collector);
 
   restoreCOA();
 

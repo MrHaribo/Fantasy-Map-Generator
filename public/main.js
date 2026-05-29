@@ -160,6 +160,7 @@ let options = {
   }
 };
 globalThis.globalOptions = options;
+globalThis.globalNotes = notes;
 
 // global style object; in v2.0 to be used for all map styles and render settings
 let style = {burgLabels: {}, burgIcons: {}, anchors: {}};

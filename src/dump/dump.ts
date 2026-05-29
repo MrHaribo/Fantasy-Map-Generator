@@ -23,6 +23,7 @@ import { dumpReligionData } from "./religion.dump";
 import { dumpLakeSpecData, dumpRiverData, dumpRiverSpecData } from "./river.dump";
 import { dumpRouteData } from "./routes.dump";
 import { dumpStateData, dumpStateFormsData, dumpStateStatsData } from "./state.dump";
+import { dumpZonesData } from "./zones.dump";
 
 export const dumpRegressionData = async () => {
   const collector = new DumpCollector();
@@ -60,6 +61,7 @@ export const dumpRegressionData = async () => {
   await dumpLakeSpecData(collector);
   await dumpMilitaryData(collector);
   await dumpMarkerData(collector);
+  await dumpZonesData(collector);
 
   restoreCOA();
 

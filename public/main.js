@@ -707,7 +707,7 @@ async function generate(options) {
     showStatistics();
     INFO && console.groupEnd("Generated Map " + seed);
   } catch (error) {
-     ERROR && console.error(error);
+    ERROR && console.error(error);
     const parsedError = parseError(error);
     clearMainTip();
 

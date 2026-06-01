@@ -1,12 +1,16 @@
 import Alea from "alea";
 import { polygonArea } from "d3";
-
-import { createTypedArray, TYPED_ARRAY_MAX_VALUES, unique } from "../utils/arrayUtils.js";
-import { clipPoly } from "../utils/commonUtils.js";
-import { distanceSquared } from "../utils/functionUtils.js";
-import { isLand, isWater } from "../utils/graphUtils.js";
-import { rn } from "../utils/numberUtils.js";
-import { connectVertices } from "../utils/pathUtils.js";
+import {
+  clipPoly,
+  connectVertices,
+  createTypedArray,
+  distanceSquared,
+  isLand,
+  isWater,
+  rn,
+  TYPED_ARRAY_MAX_VALUES,
+  unique
+} from "../utils";
 
 declare global {
   var Features: FeatureModule;
@@ -14,7 +18,7 @@ declare global {
 
 type FeatureType = "ocean" | "lake" | "island";
 
-export interface PackedGraphFeature {
+interface PackedGraphFeature {
   i: number;
   type: FeatureType;
   land: boolean;

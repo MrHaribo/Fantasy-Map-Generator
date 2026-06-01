@@ -1,11 +1,6 @@
 import Alea from "alea";
 import { range as d3Range, leastIndex, mean } from "d3";
-
-import { createTypedArray } from "../utils/arrayUtils";
-import { findGridCell } from "../utils/graphUtils";
-import { ensureEl } from "../utils/nodeUtils";
-import { lim, minmax } from "../utils/numberUtils";
-import { getNumberInRange, P, rand } from "../utils/probabilityUtils";
+import { createTypedArray, ensureEl, findGridCell, getNumberInRange, lim, minmax, P, rand } from "../utils";
 
 declare global {
   var HeightmapGenerator: HeightmapModule;
@@ -13,7 +8,7 @@ declare global {
 
 type Tool = "Hill" | "Pit" | "Range" | "Trough" | "Strait" | "Mask" | "Invert" | "Add" | "Multiply" | "Smooth";
 
-export class HeightmapModule {
+class HeightmapModule {
   grid: any = null;
   heights: Uint8Array | null = null;
   blobPower: number = 0;

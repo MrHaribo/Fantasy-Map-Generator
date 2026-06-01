@@ -18,7 +18,7 @@ declare global {
 
 type FeatureType = "ocean" | "lake" | "island";
 
-interface PackedGraphFeature {
+export interface PackedGraphFeature {
   i: number;
   type: FeatureType;
   land: boolean;
@@ -51,7 +51,7 @@ export interface GridFeature {
   type: FeatureType;
 }
 
-export class FeatureModule {
+class FeatureModule {
   private DEEPER_LAND = 3;
   private LANDLOCKED = 2;
   private LAND_COAST = 1;
